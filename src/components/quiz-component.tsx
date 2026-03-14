@@ -122,10 +122,10 @@ function ProtocolLoader({
   return (
     <div className="animate-fadeInUp">
       <div className="text-center mb-8">
-        <p className="text-red-600 font-semibold text-sm mb-1">
+        <p className="text-red-400 font-semibold text-sm mb-1">
           Aguarde, estamos criando o seu
         </p>
-        <h3 className="text-lg font-bold text-gray-900">
+        <h3 className="text-lg font-bold text-white">
           Protocolo Personalizado de Reconquista...
         </h3>
       </div>
@@ -141,17 +141,17 @@ function ProtocolLoader({
             <div className="flex items-start gap-3 mb-2">
               <span
                 className={`text-lg transition-all duration-300 ${
-                  i <= currentStep
-                    ? "text-green-600 scale-110"
+                  stepProgress[i] >= 100
+                    ? "text-green-400 scale-110"
                     : "text-gray-500"
                 }`}
               >
-                {i <= currentStep ? "✅" : "⬜"}
+                ✅
               </span>
-              <span className="text-sm text-gray-600 leading-snug flex-1">
+              <span className="text-sm text-gray-300 leading-snug flex-1">
                 {step}
               </span>
-              <span className="text-xs font-bold text-red-600 min-w-[36px] text-right tabular-nums">
+              <span className="text-xs font-bold text-red-400 min-w-[36px] text-right tabular-nums">
                 {Math.round(stepProgress[i])}%
               </span>
             </div>
@@ -173,13 +173,13 @@ function ProtocolLoader({
 
       {done && delayComplete && (
         <div className="mt-8 text-center animate-bounceIn">
-          <div className="inline-flex items-center gap-2 bg-red-500/20 backdrop-blur-md border border-red-400/30 rounded-2xl px-6 py-4">
+          <div className="inline-flex items-center gap-2">
             <span className="text-3xl">✅</span>
             <div>
-              <p className="text-red-600 font-extrabold text-lg">
+              <p className="text-white font-extrabold text-lg">
                 Protocolo Gerado!
               </p>
-              <p className="text-red-300 text-sm">Resgate agora...</p>
+              <p className="text-gray-300 text-sm">Resgate agora...</p>
             </div>
           </div>
         </div>
@@ -208,11 +208,11 @@ function Countdown({ active }: { active: boolean }) {
 
   return (
     <div className="text-center py-6 my-6 bg-red-500/20 backdrop-blur-md rounded-2xl border border-red-400/20">
-      <p className="text-sm font-medium text-gray-600 mb-1">Faltam</p>
-      <div className="text-4xl font-black text-red-600 tracking-tight tabular-nums">
+      <p className="text-sm font-medium text-gray-300 mb-1">Faltam</p>
+      <div className="text-4xl font-black text-red-400 tracking-tight tabular-nums">
         {display}
       </div>
-      <p className="text-sm font-medium text-gray-600 mt-1">
+      <p className="text-sm font-medium text-gray-300 mt-1">
         para o acesso expirar!
       </p>
     </div>
@@ -252,8 +252,8 @@ function QuizOption({
       disabled={selected}
       className={`w-full p-4 text-left rounded-xl border transition-all duration-300 ${
         selected
-          ? "bg-red-50 border-red-500 text-gray-900 scale-105"
-          : "bg-gray-50 border-gray-200 text-gray-700 hover:bg-gray-100 hover:border-gray-300 hover:scale-102"
+          ? "bg-red-600/20 border-red-500 text-white scale-105"
+          : "bg-black/30 backdrop-blur-md border-white/20 text-gray-200 hover:bg-white/20 hover:border-white/40 hover:scale-102"
       } ${selected ? "cursor-not-allowed" : "cursor-pointer"}`}
     >
       <span className="text-sm font-medium">{text}</span>
@@ -276,17 +276,17 @@ function BonusCard({
   index: number;
 }) {
   return (
-    <div className="bg-white p-6 shadow-xl">
+    <div className="bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl p-6 shadow-xl">
       <div className="flex items-start gap-4">
         <div className="text-3xl flex-shrink-0">{icon}</div>
         <div className="flex-1">
-          <h4 className="font-bold text-gray-900 text-lg mb-2">{title}</h4>
-          <p className="text-gray-600 text-sm mb-3">{description}</p>
+          <h4 className="font-bold text-white text-lg mb-2">{title}</h4>
+          <p className="text-gray-300 text-sm mb-3">{description}</p>
           <div className="flex items-center gap-2">
             <span className="text-gray-400 line-through text-sm">
               De R$ {oldPrice}
             </span>
-            <span className="text-red-600 font-bold">por GRÁTIS</span>
+            <span className="text-red-400 font-bold">por GRÁTIS</span>
           </div>
         </div>
       </div>
@@ -464,42 +464,29 @@ export default function QuizV2() {
     switch (currentStep) {
       case 0: // Hero
         return (
-          <div className="bg-white min-h-screen">
-            {/* Top urgency bar */}
-            <div className="bg-red-600 text-white text-center py-3 px-4 text-xs font-bold">
-              ⏳ Cada dia que passa, ela se distancia mais — e outro homem pode se aproximar
-            </div>
+          <div className="bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl p-8 shadow-2xl animate-fadeInUp">
+            <Logo className="pb-4" />
 
-            <div className="max-w-lg mx-auto px-4 py-8">
-              <div className="text-center mb-8">
-              <h1 className="text-xl font-extrabold text-gray-900 leading-tight mb-4">
-                ⬇️ Ela ainda sente sua falta.<br />
-                Mas você está{" "}
-                <span className="text-red-600">correndo o risco de perdê-la pra sempre</span> ⬇️
+            <div className="text-center mb-8">
+              {/* Headline Principal */}
+              <h1 className="text-[1.75rem] font-extrabold text-white leading-[1.15] mb-4 max-w-[480px] mx-auto">
+                Ela ainda sente<br />
+                sua falta — mas está<br />
+                <em className="text-green-400 not-italic">prestes a esquecer você</em>
               </h1>
 
-              {/* Social Proof Pills */}
-              <div className="flex justify-center gap-1.5 mb-6 flex-wrap">
-                <div className="bg-green-50 border border-green-200 rounded-full py-1.5 px-3 text-xs font-semibold text-green-700 flex items-center gap-1.5">
-                  <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
-                  +30.000 casos resolvidos
-                </div>
-                <div className="bg-green-50 border border-green-200 rounded-full py-1.5 px-3 text-xs font-semibold text-green-700 flex items-center gap-1.5">
-                  <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
-                  Funciona mesmo após traição
-                </div>
-                <div className="bg-green-50 border border-green-200 rounded-full py-1.5 px-3 text-xs font-semibold text-green-700 flex items-center gap-1.5">
-                  <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
-                  Resultado em até 48h
-                </div>
-              </div>
-
-              <p className="text-sm text-gray-600 mb-4 italic">
-                Veja o que aconteceu <strong className="text-gray-900 not-italic">3 dias depois</strong> que um aluno aplicou o protocolo — ele estava completamente bloqueado:
+              {/* Subheadline - Logo após a headline */}
+              <p className="text-base text-gray-300 max-w-[440px] mx-auto mb-6 leading-relaxed">
+                Faça o teste gratuito e descubra a{" "}
+                <strong className="text-white">mensagem psicológica</strong> que faz ela sentir
+                saudade e correr de volta — mesmo que ela tenha te bloqueado,
+                esteja com outro, ou você tenha errado feio.
               </p>
 
+              <div className="w-12 h-1 bg-red-500 rounded-full mx-auto mt-4 mb-6" />
+
               <Image
-                src="/img/whatsapp-hero.webp"
+                src="/img/testea.jpg"
                 alt="Mensagem no WhatsApp"
                 width={400}
                 height={320}
@@ -507,62 +494,285 @@ export default function QuizV2() {
                 className="rounded-xl shadow-lg mx-auto mb-4"
               />
 
-              <p className="text-xs text-gray-500 text-center mb-6 italic">
-                Ele estava bloqueado em tudo. Isso chegou 3 dias após aplicar o protocolo.
-              </p>
-
-              {/* CTA Button */}
-              <button
-                onClick={() => setCurrentStep(1)}
-                className="w-full py-4 bg-green-700 hover:bg-green-800 active:scale-[0.98] text-white font-extrabold text-base rounded-2xl transition-all duration-150 shadow-lg shadow-green-500/20 cursor-pointer uppercase tracking-wide mb-6"
-              >
-                QUERO RECONQUISTAR MINHA EX!
-              </button>
+              {/* Sub headline abaixo da imagem */}
+              <p className="text-center text-gray-300 text-sm mb-6">✅ 3 dias após aplicar o protocolo</p>
             </div>
 
-            <div className="bg-gray-50 border border-gray-200 rounded-2xl p-5 mb-6">
-              <p className="text-base text-gray-900 leading-relaxed mb-4 text-center font-bold">
-                Use essa <span className="text-green-600">mensagem psicológica</span> e ela vai te procurar —
-                não importa o que aconteceu entre vocês
-              </p>
-              <p className="text-sm text-gray-700 text-center leading-relaxed mb-4">
-                Funciona mesmo se você <strong className="text-gray-900">traiu ela</strong>, se ela <strong className="text-gray-900">te bloqueou</strong>,
-                se está <strong className="text-gray-900">com outro cara agora</strong> ou se vocês estão
-                <strong className="text-gray-900"> separados há meses.</strong>
-                O protocolo age no cérebro dela — não na situação.
-              </p>
-              <p className="text-sm text-gray-700 text-center">
-                Faça o teste gratuito de 60 segundos e<br />
-                <strong className="text-gray-900">desbloqueie essa mensagem agora</strong> 👇
-              </p>
-            </div>
-
-            <div className="bg-green-50 border border-green-200 rounded-2xl p-5 mb-6 space-y-4">
-              {[
-                "Além dessa mensagem você receberá um protocolo personalizado de reconquista baseado no seu caso específico",
-                "Descobrirá o erro que 93% dos homens cometem depois do término — e que afasta a ex pra sempre (você provavelmente já fez isso)",
-                "E também o atalho para trazê-la de volta nas próximas 48 horas — mesmo que ela esteja com outro ou tenha te bloqueado"
-              ].map((text, i) => (
-                <div key={i} className="flex gap-3 items-start">
-                  <span className="text-green-600 text-lg flex-shrink-0 mt-0.5">
-                    ✅
-                  </span>
-                  <span className="text-[0.95rem] text-gray-800 leading-relaxed">
-                    {text}
-                  </span>
-                </div>
-              ))}
-            </div>
-
-            {/* Second CTA Button */}
+            {/* CTA Button abaixo da imagem */}
             <button
               onClick={() => setCurrentStep(1)}
-              className="w-full py-4 bg-green-700 hover:bg-green-800 active:scale-[0.98] text-white font-extrabold text-base rounded-2xl transition-all duration-150 shadow-lg shadow-green-500/20 cursor-pointer uppercase tracking-wide mb-6"
+              className="w-full bg-green-600 hover:bg-green-700 active:scale-[0.98] text-white font-bold rounded-2xl transition-all duration-150 shadow-lg shadow-green-500/20 cursor-pointer mb-6"
             >
-              QUERO RECONQUISTAR MINHA EX!
+              <span className="block pt-4 pb-1 text-base uppercase tracking-wide">→ FAZER O TESTE GRATUITO AGORA</span>
+              <span className="block pb-4 text-xs font-normal opacity-80">60 segundos • Sem cadastro • Resultado imediato</span>
             </button>
 
+            {/* Info strip abaixo do primeiro botão */}
+            <div className="flex flex-wrap gap-4 justify-center mb-6 text-xs text-gray-400">
+              <span>🔒 100% gratuito</span>
+              <span>📱 Funciona no celular</span>
+              <span>⚡ Resultado na hora</span>
+            </div>
 
+            {/* Depoimentos */}
+            <div className="space-y-4 mb-8">
+              {/* Depoimento 1 */}
+              <div className="flex gap-3 bg-black/30 backdrop-blur-sm border border-white/10 rounded-xl p-4">
+                <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
+                  <Image
+                    src="/img/rafael.jpg"
+                    alt="Rafael"
+                    width={40}
+                    height={40}
+                    className="w-full h-full object-cover"
+                    style={{ objectPosition: '50% 5%' }}
+                  />
+                </div>
+                <div className="flex-1">
+                  <div className="text-sm font-semibold text-white">Rafael M., 31 anos</div>
+                  <div className="text-xs text-amber-400 mb-1">Caso: ela tinha me bloqueado em tudo</div>
+                  <div className="text-xs text-gray-300 leading-relaxed">
+                    "Achei que era impossível. Ela me bloqueou até no WhatsApp. Depois que mandei aquela mensagem do protocolo, ela me desbloqueou e mandou áudio chorando."
+                  </div>
+                  <div className="text-yellow-400 text-xs mt-1">★★★★★</div>
+                </div>
+              </div>
+
+              {/* Depoimento 2 */}
+              <div className="flex gap-3 bg-black/30 backdrop-blur-sm border border-white/10 rounded-xl p-4">
+                <Image
+                  src="/img/marcos.jpg"
+                  alt="Marcos"
+                  width={40}
+                  height={40}
+                  className="w-10 h-10 rounded-full object-cover flex-shrink-0"
+                />
+                <div className="flex-1">
+                  <div className="text-sm font-semibold text-white">Marcos T., 38 anos — casado, 2 filhos</div>
+                  <div className="text-xs text-amber-400 mb-1">Caso: separado há 8 meses, ela queria divórcio</div>
+                  <div className="text-xs text-gray-300 leading-relaxed">
+                    "Estava a ponto de assinar o divórcio. Hoje estamos juntos de novo. O método me mostrou exatamente o que eu estava fazendo de errado há anos."
+                  </div>
+                  <div className="text-yellow-400 text-xs mt-1">★★★★★</div>
+                </div>
+              </div>
+
+              {/* Depoimento 3 */}
+              <div className="flex gap-3 bg-black/30 backdrop-blur-sm border border-white/10 rounded-xl p-4">
+                <Image
+                  src="/img/diego.webp"
+                  alt="Diego"
+                  width={40}
+                  height={40}
+                  className="w-10 h-10 rounded-full object-cover flex-shrink-0"
+                />
+                <div className="flex-1">
+                  <div className="text-sm font-semibold text-white">Diego P., 29 anos</div>
+                  <div className="text-xs text-amber-400 mb-1">Caso: eu tinha traído ela</div>
+                  <div className="text-xs text-gray-300 leading-relaxed">
+                    "Eu traí ela. Pensei que não teria volta. Em 6 dias ela voltou a conversar comigo. Hoje estamos juntos e mais fortes que antes."
+                  </div>
+                  <div className="text-yellow-400 text-xs mt-1">★★★★★</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Segundo CTA Button após depoimentos */}
+            <button
+              onClick={() => setCurrentStep(1)}
+              className="w-full bg-green-600 hover:bg-green-700 active:scale-[0.98] text-white font-bold rounded-2xl transition-all duration-150 shadow-lg shadow-green-500/20 cursor-pointer mb-6"
+            >
+              <span className="block pt-4 pb-1 text-base uppercase tracking-wide">→ FAZER O TESTE GRATUITO AGORA</span>
+              <span className="block pb-4 text-xs font-normal opacity-80">60 segundos • Sem cadastro • Resultado imediato</span>
+            </button>
+
+            {/* Info strip abaixo do segundo botão */}
+            <div className="flex flex-wrap gap-4 justify-center mb-8 text-xs text-gray-400">
+              <span>🔒 100% gratuito</span>
+              <span>📱 Funciona no celular</span>
+              <span>⚡ Resultado na hora</span>
+            </div>
+
+            {/* O que você vai descobrir */}
+            <div className="mb-8">
+              <h3 className="text-lg font-bold text-white text-center mb-6">
+                O que você vai descobrir no teste
+              </h3>
+
+              <div className="space-y-4">
+                {/* Bullet 1 */}
+                <div className="bg-black/30 backdrop-blur-sm border border-green-400/20 rounded-xl p-4 flex gap-3 items-start">
+                  <div className="w-7 h-7 rounded-full border-2 border-green-400 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="text-green-400 font-bold text-base">✓</span>
+                  </div>
+                  <div className="text-sm text-gray-200 leading-relaxed">
+                    <strong className="text-white">A mensagem psicológica de 3 palavras</strong> que ativa o cérebro dela e faz ela sentir sua falta — você pode mandar ainda hoje, mesmo que ela esteja te ignorando
+                  </div>
+                </div>
+
+                {/* Bullet 2 */}
+                <div className="bg-black/30 backdrop-blur-sm border border-green-400/20 rounded-xl p-4 flex gap-3 items-start">
+                  <div className="w-7 h-7 rounded-full border-2 border-green-400 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="text-green-400 font-bold text-base">✓</span>
+                  </div>
+                  <div className="text-sm text-gray-200 leading-relaxed">
+                    <strong className="text-white">O erro que 93% dos homens cometem</strong> depois do término — e que empurra a ex para longe de vez (você provavelmente já fez isso)
+                  </div>
+                </div>
+
+                {/* Bullet 3 */}
+                <div className="bg-black/30 backdrop-blur-sm border border-green-400/20 rounded-xl p-4 flex gap-3 items-start">
+                  <div className="w-7 h-7 rounded-full border-2 border-green-400 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="text-green-400 font-bold text-base">✓</span>
+                  </div>
+                  <div className="text-sm text-gray-200 leading-relaxed">
+                    <strong className="text-white">O protocolo de 48 horas</strong> que já trouxe de volta mais de 30.000 mulheres — funciona mesmo depois de traição, bloqueio ou se ela já está com outro cara
+                  </div>
+                </div>
+
+                {/* Bullet 4 */}
+                <div className="bg-black/30 backdrop-blur-sm border border-green-400/20 rounded-xl p-4 flex gap-3 items-start">
+                  <div className="w-7 h-7 rounded-full border-2 border-green-400 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="text-green-400 font-bold text-base">✓</span>
+                  </div>
+                  <div className="text-sm text-gray-200 leading-relaxed">
+                    <strong className="text-white">O que falar quando ela ficar fria</strong> ou distante — a maioria dos homens piora tudo nessa hora, você vai saber exatamente como agir
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Funciona no seu caso? - Quebra de objeções */}
+            <div className="mb-8">
+              <h3 className="text-xl font-bold text-white text-center mb-6">
+                Funciona no seu caso?
+              </h3>
+
+              <div className="space-y-4">
+                {/* Objeção 1 - Traição */}
+                <div className="bg-black/30 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden">
+                  <div className="p-4 flex items-center gap-3">
+                    <div className="text-2xl">💔</div>
+                    <div className="flex-1">
+                      <div className="text-sm font-semibold text-white">Você traiu ela</div>
+                      <div className="text-xs text-gray-400 italic">"Fiz a coisa mais horrível — ela nunca vai me perdoar"</div>
+                    </div>
+                    <div className="bg-green-500/20 border border-green-400/30 px-3 py-1 rounded-full text-xs text-green-400 font-semibold">
+                      Funciona
+                    </div>
+                  </div>
+                  <div className="px-4 pb-4 text-xs text-gray-300 leading-relaxed">
+                    A traição cria uma ferida emocional — não uma decisão racional. O protocolo age exatamente nessa camada: reativa o vínculo emocional que existia antes da dor. <strong className="text-white">Mais de 4.500 alunos haviam traído a parceira.</strong> A maioria voltou em menos de 30 dias.
+                  </div>
+                </div>
+
+                {/* Objeção 2 - Bloqueio */}
+                <div className="bg-black/30 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden">
+                  <div className="p-4 flex items-center gap-3">
+                    <div className="text-2xl">🚫</div>
+                    <div className="flex-1">
+                      <div className="text-sm font-semibold text-white">Ela te bloqueou em tudo</div>
+                      <div className="text-xs text-gray-400 italic">"Não tenho como nem chegar perto dela"</div>
+                    </div>
+                    <div className="bg-green-500/20 border border-green-400/30 px-3 py-1 rounded-full text-xs text-green-400 font-semibold">
+                      Funciona
+                    </div>
+                  </div>
+                  <div className="px-4 pb-4 text-xs text-gray-300 leading-relaxed">
+                    O bloqueio é uma reação emocional — não uma sentença. Existe uma mensagem específica desenhada para esse cenário que chega por um canal que ela não bloqueou. Depois que ela responde, o caminho se abre. <strong className="text-white">Mais de 4.800 alunos estavam bloqueados em tudo</strong> quando começaram.
+                  </div>
+                </div>
+
+                {/* Objeção 3 - Outro cara */}
+                <div className="bg-black/30 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden">
+                  <div className="p-4 flex items-center gap-3">
+                    <div className="text-2xl">👤</div>
+                    <div className="flex-1">
+                      <div className="text-sm font-semibold text-white">Ela está com outro cara</div>
+                      <div className="text-xs text-gray-400 italic">"Já é tarde demais — ela seguiu em frente"</div>
+                    </div>
+                    <div className="bg-green-500/20 border border-green-400/30 px-3 py-1 rounded-full text-xs text-green-400 font-semibold">
+                      Funciona
+                    </div>
+                  </div>
+                  <div className="px-4 pb-4 text-xs text-gray-300 leading-relaxed">
+                    Relacionamentos novos formados logo após um término são quase sempre uma fuga emocional, não amor de verdade. O protocolo age no vínculo profundo que ela tem com você — algo que nenhum homem novo consegue apagar em semanas. <strong className="text-white">O cérebro não esquece anos de história assim tão rápido.</strong>
+                  </div>
+                </div>
+
+                {/* Objeção 4 - Tempo */}
+                <div className="bg-black/30 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden">
+                  <div className="p-4 flex items-center gap-3">
+                    <div className="text-2xl">📅</div>
+                    <div className="flex-1">
+                      <div className="text-sm font-semibold text-white">Faz meses que vocês terminaram</div>
+                      <div className="text-xs text-gray-400 italic">"Passou tempo demais — ela já me esqueceu"</div>
+                    </div>
+                    <div className="bg-green-500/20 border border-green-400/30 px-3 py-1 rounded-full text-xs text-green-400 font-semibold">
+                      Funciona
+                    </div>
+                  </div>
+                  <div className="px-4 pb-4 text-xs text-gray-300 leading-relaxed">
+                    O tempo não apaga vínculos — ele só os adormece. Já ajudamos homens separados há mais de 2 anos a reconquistar a esposa. O protocolo acorda exatamente esse vínculo adormecido, <strong className="text-white">usando gatilhos que o cérebro dela ainda responde</strong> mesmo depois de muito tempo.
+                  </div>
+                </div>
+
+                {/* Objeção 5 - Casados/Filhos */}
+                <div className="bg-black/30 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden">
+                  <div className="p-4 flex items-center gap-3">
+                    <div className="text-2xl">👨‍👩‍👧</div>
+                    <div className="flex-1">
+                      <div className="text-sm font-semibold text-white">Eram casados — têm filhos</div>
+                      <div className="text-xs text-gray-400 italic">"Não é só um namoro — é uma família inteira"</div>
+                    </div>
+                    <div className="bg-green-500/20 border border-green-400/30 px-3 py-1 rounded-full text-xs text-green-400 font-semibold">
+                      Funciona
+                    </div>
+                  </div>
+                  <div className="px-4 pb-4 text-xs text-gray-300 leading-relaxed">
+                    Casamentos têm raízes mais fundas — e isso trabalha a seu favor. O vínculo construído ao longo de anos, os filhos, a história compartilhada: tudo isso cria um caminho emocional que o protocolo usa para reacender o que ela sente. <strong className="text-white">Mais de 13.000 dos nossos alunos eram casados ou tinham filhos</strong> quando começaram.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Segundo CTA - Urgência */}
+            <div className="mb-8 text-center">
+              <h3 className="text-xl font-bold text-white mb-3">
+                Você não pode se dar ao luxo<br/>de esperar mais um dia
+              </h3>
+              <p className="text-sm text-gray-300 max-w-md mx-auto">
+                O teste é gratuito, leva 60 segundos e revela o que fazer hoje.
+                Não existe momento certo — esse é o momento.
+              </p>
+            </div>
+
+            <button
+              onClick={() => setCurrentStep(1)}
+              className="w-full bg-green-600 hover:bg-green-700 active:scale-[0.98] text-white font-bold rounded-2xl transition-all duration-150 shadow-lg shadow-green-500/20 cursor-pointer"
+            >
+              <span className="block pt-4 pb-1 text-base uppercase tracking-wide">
+                → FAZER O TESTE GRATUITO AGORA
+              </span>
+              <span className="block pb-4 text-xs font-normal opacity-80">
+                60 segundos • Sem cadastro • Resultado imediato
+              </span>
+            </button>
+
+            {/* Micro CTAs */}
+            <div className="flex flex-wrap gap-4 justify-center mt-3 text-xs text-gray-400">
+              <span>🔒 100% gratuito</span>
+              <span>📱 Funciona no celular</span>
+              <span>⚡ Resultado na hora</span>
+            </div>
+
+            {/* Footer */}
+            <div className="mt-12 pt-8 border-t border-white/10 text-center text-xs text-gray-400">
+              © Código da Reconquista — Lucas Krausche<br/>
+              Psicanalista Clínico especializado em relacionamentos<br/><br/>
+              <span className="text-[10px] opacity-50">
+                Os resultados podem variar. Depoimentos reais de alunos do programa.
+              </span>
             </div>
           </div>
         );
@@ -571,14 +781,13 @@ export default function QuizV2() {
         const qIdx = currentStep - 1;
         const q = questions[qIdx];
         return (
-          <div className="bg-white min-h-screen">
-            <div className="max-w-lg mx-auto px-4 py-8">
-              <div className="flex items-center gap-2 mb-6">
-                <span className="text-xs font-bold text-red-600 bg-red-50 border border-red-200 px-3 py-1 rounded-full">
-                  Pergunta {qIdx + 1} de 5
-                </span>
-              </div>
-            <h2 className="text-[1.35rem] font-bold text-gray-900 leading-snug mb-6">
+          <div className="bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl p-8 shadow-2xl animate-fadeInUp">
+            <div className="flex items-center gap-2 mb-6">
+              <span className="text-xs font-bold text-red-400 bg-red-400/20 backdrop-blur-md border border-red-400/20 px-3 py-1 rounded-full">
+                Pergunta {qIdx + 1} de 5
+              </span>
+            </div>
+            <h2 className="text-[1.35rem] font-bold text-white leading-snug mb-6">
               {q.question}
             </h2>
             <div className="space-y-3">
@@ -594,58 +803,49 @@ export default function QuizV2() {
             </div>
             {answers[qIdx] !== null && (
               <div className="flex justify-center mt-6 animate-fadeIn">
-                <span className="text-green-600 text-sm font-semibold flex items-center gap-1">
+                <span className="text-green-400 text-sm font-semibold flex items-center gap-1">
                   ✅ Resposta registrada
                 </span>
               </div>
             )}
-            </div>
           </div>
         );
 
       case 6: // Result
         return (
           <div
-            className="bg-white p-8 shadow-lg animate-fadeInUp max-h-screen overflow-y-auto hide-scrollbar"
+            className="bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl p-8 shadow-2xl animate-fadeInUp max-h-screen overflow-y-auto hide-scrollbar"
             style={{
               scrollbarWidth: 'none',
               msOverflowStyle: 'none',
             }}
           >
-            {/* Alert */}
-            <div className="bg-amber-50 border-2 border-amber-300 rounded-2xl p-4 text-center mb-8">
-              <span className="text-2xl">⚠️</span>
-              <p className="text-sm font-bold text-amber-700 mt-1">
-                ATENÇÃO: Não saia dessa página!
-              </p>
-            </div>
-
             {/* Percentage */}
             <div className="text-center mb-10">
-              <p className="text-base font-bold text-gray-900 mb-2">
+              <p className="text-base font-bold text-white mb-2">
                 Suas chances de voltar com sua ex
               </p>
-              <p className="text-sm font-semibold text-red-600 italic mb-3">
+              <p className="text-sm font-semibold text-red-400 italic mb-3">
                 SÃO DE APENAS
               </p>
-              <div className="text-6xl font-black text-red-600 mb-3 animate-bounceIn">
+              <div className="text-6xl font-black text-red-400 mb-3 animate-bounceIn">
                 12%
               </div>
-              <p className="text-[0.95rem] text-gray-600">
-                — <em className="text-red-600 font-semibold">isso é crítico</em>{" "}
+              <p className="text-[0.95rem] text-gray-300">
+                — <em className="text-red-400 font-semibold">isso é crítico</em>{" "}
                 — mas ao seguir esse protocolo você pode{" "}
-                <strong className="text-gray-900">GARANTIR que ela volte</strong>
+                <strong className="text-white">GARANTIR que ela volte</strong>
               </p>
             </div>
 
             <div className="w-16 h-0.5 bg-gray-600 rounded mx-auto mb-10" />
 
             {/* Story */}
-            <div className="space-y-4 text-[0.95rem] text-gray-600 leading-relaxed">
-              <p className="text-lg font-bold text-gray-900">Fala, irmão!</p>
+            <div className="space-y-4 text-[0.95rem] text-gray-300 leading-relaxed">
+              <p className="text-lg font-bold text-white">Fala, irmão!</p>
               <p>
                 Meu nome é{" "}
-                <strong className="text-red-600">Lucas Krausche</strong>.
+                <strong className="text-white">Lucas Krausche</strong>.
               </p>
               <p>E, eu sei exatamente o que você está passando.</p>
               <p>Te digo isso porque eu já estive do outro lado.</p>
@@ -660,13 +860,13 @@ export default function QuizV2() {
               </p>
               <p>
                 Até que, um dia,{" "}
-                <strong className="text-gray-900">ela terminou comigo.</strong>
+                <strong className="text-red-400">ela terminou comigo.</strong>
               </p>
               <p>
-                Naquele momento, parecia que o meu mundo tinha desabado.
+                E naquele momento, parecia que o meu mundo tinha desabado.
               </p>
               <p>
-                Foi aí que começou o meu verdadeiro inferno emocional:
+                Foi aí que começou o meu verdadeiro inferno emocional.
               </p>
               <p>
                 Eu ligava sem parar, mandava mensagem atrás de mensagem, ficava
@@ -684,14 +884,21 @@ export default function QuizV2() {
 
               <p>
                 O pior que quando ela postava um story,{" "}
-                <span className="text-red-600 font-semibold">
+                <strong className="text-white">
                   eu imaginava logo que estava saindo com outro.
-                </span>{" "}
-                E isso me destruía por dentro e me deixava em crises e ansiedade.
+                </strong>{" "}
+                E isso me <span className="text-red-400 font-semibold">destruía por dentro</span> e me deixava em crises e ansiedade.
               </p>
               <p>
-                <strong className="text-gray-900">E o pior...</strong> Era
+                <strong className="text-white">E o pior...</strong> Era
                 quando eu estava bloqueado.
+              </p>
+              <p>
+                Aí ía fazer perfil fake para ver o que ela estava postando, ficava
+                pedindo pros meus amigos enviarem o que ela tinha postado... E adivinha?
+              </p>
+              <p>
+                Lá estava eu, <span className="text-red-400 font-semibold">chorando, triste, sem conseguir comer, sem conseguir trabalhar direito...</span>
               </p>
               <p>
                 Eu vivia naquela angústia sem fim, me perguntando a cada minuto:
@@ -705,24 +912,28 @@ export default function QuizV2() {
               </ol>
               <p>
                 E a verdade é que...{" "}
-                <span className="text-red-600 font-semibold">
-                  quanto mais eu corria atrás, mais ela se afastava.
-                </span>
+                quanto mais eu <strong className="text-red-400">corria atrás</strong>,
+                mais ela <strong className="text-red-400">se afastava</strong>.
               </p>
               <p>
                 Foi só então que eu percebi:{" "}
-                <strong className="text-gray-900">
-                  O problema não era ela. O verdadeiro problema era eu não
-                  entender a mente feminina.
+                <strong className="text-red-400">
+                  O problema não era ela.
                 </strong>
               </p>
               <p>
-                Eu não sabia como funcionava o{" "}
-                <span className="text-blue-400 font-semibold">
-                  desejo de uma mulher
-                </span>
-                ... e, por isso, eu fazia exatamente o oposto do que despertaria
-                vontade de voltar nela.
+                O verdadeiro problema era{" "}
+                <strong className="text-red-400">
+                  eu não entender a mente feminina.
+                </strong>
+              </p>
+              <p>
+                Eu não sabia como funcionava o desejo de uma mulher...{" "}
+                <strong className="text-white">e, por isso, eu fazia exatamente o oposto</strong>{" "}
+                do que despertaria vontade de voltar nela.
+              </p>
+              <p>
+                Foi nessa fase de dor que eu percebi <strong className="text-white">da pior forma possível</strong> uma verdade dura:
               </p>
               <p>
                 Mas ao invés de aceitar a derrota, eu decidi transformar essa dor
@@ -735,28 +946,24 @@ export default function QuizV2() {
                 já compartilhei esse segredo oculto...
               </p>
               <p>
-                <span className="text-red-600 font-semibold">
-                  Quanto mais você é disponível para uma mulher, mais ela se
-                  afasta...
-                </span>
+                <strong className="text-white">Quanto mais você é disponível para uma mulher,</strong>{" "}
+                <span className="text-red-400 font-semibold">mais ela se afasta...</span>
               </p>
               <p>
                 Porém, em apenas{" "}
-                <strong className="text-gray-900">3 etapas</strong>, você
-                consegue fazer qualquer mulher comer nas suas mãos outra vez e se
-                arrepender de ter terminado contigo{" "}
-                <strong className="text-gray-900">
+                <strong className="text-green-400">3 etapas</strong>, você
+                consegue fazer qualquer mulher comer nas suas mãos outra vez e{" "}
+                <strong className="text-green-400">se arrepender</strong> de ter terminado contigo{" "}
+                <strong className="text-white">
                   (Mesmo que você tenha feito uma besteira muito grande).
                 </strong>
               </p>
               <p>
                 Ao longo dos últimos anos, eu me formei em{" "}
-                <strong className="text-gray-900">Psicanálise</strong>, e hoje
+                <strong className="text-white">Psicanálise</strong>, e hoje
                 sou{" "}
-                <strong className="text-gray-900">
-                  Psicanalista Clínico especializado em relacionamentos e
+                <strong className="text-white">Psicanalista Clínico</strong> especializado em relacionamentos e
                   comportamento humano.
-                </strong>
               </p>
 
               <Image
@@ -769,10 +976,10 @@ export default function QuizV2() {
 
               <p>
                 Desde que comecei a compartilhar conteúdos sobre relacionamento,{" "}
-                <span className="text-blue-400 font-semibold">
+                <strong className="text-white">
                   conquistei quase 2 milhões de seguidores em todas minhas redes
                   sociais.
-                </span>
+                </strong>
               </p>
 
               <Image
@@ -786,11 +993,11 @@ export default function QuizV2() {
               <p>
                 E aquela mulher que havia me deixado, depois que eu apliquei
                 exatamente o mesmo{" "}
-                <span className="text-blue-400 font-semibold">
+                <strong className="text-white">
                   truque de 3 etapas
-                </span>{" "}
+                </strong>{" "}
                 que eu vou te revelar neste plano, hoje é{" "}
-                <strong className="text-gray-900">minha noiva.</strong>
+                <strong className="text-white">minha noiva.</strong>
               </p>
 
               <Image
@@ -803,13 +1010,22 @@ export default function QuizV2() {
 
               <p>
                 E o melhor... Eu fundei o{" "}
-                <span className="text-blue-400 font-semibold">
+                <strong className="text-white">
                   Clube das Deusas de Alto Valor
-                </span>
+                </strong>
                 , um método exclusivo que ensina mulheres a curar traumas
                 profundos para terem relacionamentos saudáveis. Hoje o Clube
                 conta com mais de{" "}
-                <strong className="text-gray-900">2.800 alunas.</strong>
+                <strong className="text-white">2.800 alunas.</strong>
+              </p>
+              <p>
+                Mas isso me deu acesso a{" "}
+                <strong className="text-white">TODOS</strong> os segredos
+                mais ocultos da mente feminina... Segredos que agora eu vou te
+                revelar para que{" "}
+                <strong className="text-white">a sua ex volte a sentir sua falta, se arrependa
+                de ter te deixado e queira correr atrás de você ainda essa
+                semana.</strong>
               </p>
 
               <Image
@@ -819,19 +1035,16 @@ export default function QuizV2() {
                 height={600}
                 className="rounded-xl shadow-lg w-full my-4"
               />
-              <p>
-                Mas isso me deu acesso a{" "}
-                <strong className="text-gray-900">TODOS</strong> os segredos
-                mais ocultos da mente feminina... Segredos que agora eu vou te
-                revelar para que a sua ex volte a sentir sua falta, se arrependa
-                de ter te deixado e queira correr atrás de você ainda essa
-                semana.
-              </p>
             </div>
+
+            <p className="text-center text-white mb-4 mt-8">
+              Toque abaixo para<br/>
+              <strong>Avançar com o Plano!</strong> 👇
+            </p>
 
             <button
               onClick={() => setCurrentStep(7)}
-              className="w-full mt-10 py-4 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 active:scale-[0.98] text-white font-bold text-base rounded-2xl transition-all duration-150 shadow-lg shadow-green-500/20 cursor-pointer uppercase tracking-wide"
+              className="w-full py-4 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 active:scale-[0.98] text-white font-bold text-base rounded-2xl transition-all duration-150 shadow-lg shadow-green-500/20 cursor-pointer uppercase tracking-wide"
             >
               Continuar Plano!
             </button>
@@ -840,8 +1053,8 @@ export default function QuizV2() {
 
       case 7: // Engage 1
         return (
-          <div className="bg-white p-8 animate-fadeInUp min-h-screen">
-            <h2 className="text-[1.35rem] font-bold text-gray-900 text-center leading-snug mb-8">
+          <div className="bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl p-8 shadow-2xl animate-fadeInUp">
+            <h2 className="text-[1.35rem] font-bold text-white text-center leading-snug mb-8">
               Você gostaria que, além da mensagem de 3 palavras, eu te mostrasse
               como fazer o cérebro dela sentir saudade e voltar correndo pra
               você, mesmo que ela esteja com outro?
@@ -854,7 +1067,7 @@ export default function QuizV2() {
                 <button
                   key={i}
                   onClick={() => setCurrentStep(8)}
-                  className="p-4 rounded-2xl border-2 border-red-400/30 bg-red-500/20 hover:border-red-400/50 hover:bg-red-500/30 active:scale-[0.97] transition-all text-[0.95rem] font-semibold text-gray-900 cursor-pointer text-center backdrop-blur-md"
+                  className="p-4 rounded-2xl border-2 border-red-400/30 bg-red-500/20 hover:border-red-400/50 hover:bg-red-500/30 active:scale-[0.97] transition-all text-[0.95rem] font-semibold text-white cursor-pointer text-center backdrop-blur-md"
                 >
                   {text}
                 </button>
@@ -865,8 +1078,8 @@ export default function QuizV2() {
 
       case 8: // Engage 2
         return (
-          <div className="bg-white p-8 animate-fadeInUp min-h-screen">
-            <h2 className="text-[1.35rem] font-bold text-gray-900 text-center leading-snug mb-8">
+          <div className="bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl p-8 shadow-2xl animate-fadeInUp">
+            <h2 className="text-[1.35rem] font-bold text-white text-center leading-snug mb-8">
               Se existisse um vídeo curto de 60 segundos mostrando o passo a
               passo exato para fazer sua ex voltar nas próximas 48 horas, você se
               comprometeria a assistir esse vídeo até o final?
@@ -880,9 +1093,12 @@ export default function QuizV2() {
                 <button
                   key={i}
                   onClick={() => setCurrentStep(9)}
-                  className="w-full p-4 rounded-2xl border-2 border-red-400/30 bg-red-500/20 hover:border-red-400/50 hover:bg-red-500/30 active:scale-[0.97] transition-all text-[0.95rem] font-semibold text-gray-900 cursor-pointer text-center"
+                  className="w-full flex items-center gap-4 p-4 rounded-2xl border-2 border-white/20 bg-black/30 hover:border-red-400/40 hover:bg-red-500/20 active:scale-[0.97] transition-all text-left cursor-pointer backdrop-blur-md"
                 >
-                  {opt}
+                  <span className="w-6 h-6 rounded-full border-2 border-gray-400 flex-shrink-0" />
+                  <span className="text-[0.95rem] font-medium text-gray-200">
+                    {opt}
+                  </span>
                 </button>
               ))}
             </div>
@@ -892,12 +1108,7 @@ export default function QuizV2() {
       case 9: // Loading + VSL
         return (
           <>
-            <div className="bg-white p-8 shadow-lg animate-fadeInUp">
-              {/* Instruction Text */}
-              <p className="text-center text-gray-700 font-medium text-lg mb-6">
-                Assista o vídeo abaixo enquanto criamos seu protocolo personalizado de reconquista.
-              </p>
-
+            <div className="bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl p-8 shadow-2xl animate-fadeInUp">
               {/* VTurb Video Player */}
               <div className="mb-8">
                 <VTurbPlayer />
@@ -906,7 +1117,7 @@ export default function QuizV2() {
               {currentStep === 9 && (
                 <ProtocolLoader
                   active={true}
-                  startDelay={432000}
+                  startDelay={0}
                   onComplete={handleProtocolComplete}
                 />
               )}
@@ -917,7 +1128,7 @@ export default function QuizV2() {
                     setSalesActive(true);
                     setCurrentStep(10);
                   }}
-                  className="w-full mt-8 py-4 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 active:scale-[0.98] text-gray-900 font-bold text-base rounded-2xl transition-all duration-150 shadow-lg shadow-green-500/20 cursor-pointer uppercase tracking-wide animate-fadeInUp"
+                  className="w-full mt-8 py-4 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 active:scale-[0.98] text-white font-bold text-base rounded-2xl transition-all duration-150 shadow-lg shadow-green-500/20 cursor-pointer uppercase tracking-wide animate-fadeInUp"
                 >
                   Clique aqui para RECONQUISTAR sua ex!
                 </button>
@@ -929,31 +1140,29 @@ export default function QuizV2() {
 
       case 10: // Sales
         return (
-          <div className="bg-white p-8 shadow-lg animate-fadeInUp max-h-screen overflow-y-auto hide-scrollbar">
+          <div className="bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl p-8 shadow-2xl animate-fadeInUp max-h-screen overflow-y-auto hide-scrollbar">
             {/* Header - Protocol Complete */}
             <div className="text-center mb-8">
               <div className="text-4xl mb-4">✅</div>
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">
+              <h2 className="text-2xl font-bold text-white mb-4">
                 SEU PROTOCOLO PERSONALIZADO FOI GERADO!
               </h2>
-              <p className="text-gray-600 text-[0.95rem] leading-relaxed">
-                Agora você tem acesso aos <strong className="text-gray-900">códigos diretos</strong> para
+              <p className="text-gray-300 text-[0.95rem] leading-relaxed">
+                Agora você tem acesso aos <strong className="text-white">códigos diretos</strong> para
                 fazer sua ex sentir sua falta e voltar correndo pra você...
               </p>
             </div>
 
             {/* Investment Framing */}
-            <div className="bg-red-500/10 border border-red-400/30 rounded-2xl p-6 mb-8">
-              <p className="text-center text-[0.95rem] text-gray-600 leading-relaxed">
-                Você está prestes a investir na <strong className="text-gray-900">segunda chance de reescrever sua história de amor</strong>.
-                O mesmo protocolo que transformou homens destruídos em caras que reconquistaram o respeito,
-                o desejo e o amor de suas ex-namoradas.
-              </p>
-            </div>
+            <p className="text-center text-[0.95rem] text-gray-300 leading-relaxed mb-8">
+              Você está prestes a investir na <strong className="text-white">segunda chance de reescrever sua história de amor</strong>.
+              O mesmo protocolo que transformou homens destruídos em caras que reconquistaram o respeito,
+              o desejo e o amor de suas ex-namoradas.
+            </p>
 
             {/* Choice Framework */}
             <div className="mb-8">
-              <h3 className="text-xl font-bold text-gray-900 text-center mb-6">
+              <h3 className="text-xl font-bold text-white text-center mb-6">
                 AGORA VOCÊ TEM 2 OPÇÕES:
               </h3>
               <div className="space-y-4">
@@ -961,8 +1170,8 @@ export default function QuizV2() {
                   <div className="flex items-start gap-3">
                     <span className="text-2xl">❌</span>
                     <div>
-                      <p className="text-gray-900 font-semibold mb-2">OPÇÃO 1: Continuar com 12% de chance</p>
-                      <p className="text-gray-600 text-sm">
+                      <p className="text-white font-semibold mb-2">OPÇÃO 1: Continuar com 12% de chance</p>
+                      <p className="text-gray-300 text-sm">
                         Ficar travado, mandando mensagens aleatórias, sendo rejeitado e vendo ela se afastar cada vez mais...
                       </p>
                     </div>
@@ -972,8 +1181,8 @@ export default function QuizV2() {
                   <div className="flex items-start gap-3">
                     <span className="text-2xl">❤️</span>
                     <div>
-                      <p className="text-gray-900 font-semibold mb-2">OPÇÃO 2: Usar o protocolo que funcionou para 30.000+ casais</p>
-                      <p className="text-gray-600 text-sm">
+                      <p className="text-white font-semibold mb-2">OPÇÃO 2: Usar o protocolo que funcionou para 30.000+ casais</p>
+                      <p className="text-gray-300 text-sm">
                         Aplicar a mesma estratégia psicológica que fez ela voltar a sentir desejo, saudade e querer lutar pelo seu relacionamento.
                       </p>
                     </div>
@@ -985,14 +1194,14 @@ export default function QuizV2() {
             {/* Guarantee Section */}
             <div className="text-center mb-8">
               <div className="bg-amber-500/20 border border-amber-400/30 rounded-2xl p-6">
-                <h3 className="text-xl font-extrabold text-gray-900 mb-3">
+                <h3 className="text-xl font-extrabold text-white mb-3">
                   🛡️ GARANTIA INQUEBRÁVEL DE 90 DIAS
                 </h3>
-                <p className="text-gray-600 text-[0.95rem] leading-relaxed">
-                  Se em 90 dias você não conseguir <strong className="text-gray-900">NENHUM resultado</strong>,
+                <p className="text-gray-300 text-[0.95rem] leading-relaxed">
+                  Se em 90 dias você não conseguir <strong className="text-white">NENHUM resultado</strong>,
                   eu devolvo 100% do seu dinheiro. Sem perguntas, sem complicação.
                 </p>
-                <p className="text-amber-700 font-semibold mt-3 text-sm">
+                <p className="text-amber-300 font-semibold mt-3 text-sm">
                   Ou seja, o risco é todo MEU!
                 </p>
               </div>
@@ -1001,27 +1210,27 @@ export default function QuizV2() {
             {/* First CTA */}
             <a
               href="https://pay.kiwify.com.br/2yjxPKj"
-              className="block w-full py-4 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 active:scale-[0.98] text-gray-900 font-bold text-lg rounded-2xl transition-all duration-150 shadow-lg shadow-green-500/20 text-center uppercase tracking-wide mb-8"
+              className="block w-full py-4 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 active:scale-[0.98] text-white font-bold text-lg rounded-2xl transition-all duration-150 shadow-lg shadow-green-500/20 text-center uppercase tracking-wide mb-8"
             >
               🎯 QUERO RECONQUISTAR MINHA EX AGORA!
             </a>
 
             {/* Product Promise */}
             <div className="bg-red-500/10 border border-red-400/30 rounded-2xl p-6 mb-8">
-              <h4 className="text-gray-900 font-bold text-center mb-3">
+              <h4 className="text-white font-bold text-center mb-3">
                 O CÓDIGO DA RECONQUISTA entrega exatamente:
               </h4>
-              <div className="space-y-2 text-gray-600 text-sm">
-                <p>✅ <strong className="text-gray-900">O QUE</strong> falar para despertar saudade visceral</p>
-                <p>✅ <strong className="text-gray-900">QUANDO</strong> enviar cada mensagem para máximo impacto</p>
-                <p>✅ <strong className="text-gray-900">COMO</strong> manter a mente dela viciada em você</p>
-                <p>✅ <strong className="text-gray-900">ONDE</strong> aplicar cada gatilho psicológico</p>
+              <div className="space-y-2 text-gray-300 text-sm">
+                <p>✅ <strong className="text-white">O QUE</strong> falar para despertar saudade visceral</p>
+                <p>✅ <strong className="text-white">QUANDO</strong> enviar cada mensagem para máximo impacto</p>
+                <p>✅ <strong className="text-white">COMO</strong> manter a mente dela viciada em você</p>
+                <p>✅ <strong className="text-white">ONDE</strong> aplicar cada gatilho psicológico</p>
               </div>
             </div>
 
             {/* Bonuses Section */}
             <div className="mb-8">
-              <h3 className="text-xl font-bold text-gray-900 text-center mb-6">
+              <h3 className="text-xl font-bold text-white text-center mb-6">
                 🎁 + VOCÊ GANHA 5 BÔNUS EXCLUSIVOS:
               </h3>
 
@@ -1037,8 +1246,8 @@ export default function QuizV2() {
                   <div className="flex items-start gap-3">
                     <span className="text-2xl">🎥</span>
                     <div>
-                      <h5 className="text-gray-900 font-bold">BÔNUS 6: Sessões Ao Vivo Semanais</h5>
-                      <p className="text-gray-600 text-sm mt-1">
+                      <h5 className="text-white font-bold">BÔNUS 6: Sessões Ao Vivo Semanais</h5>
+                      <p className="text-gray-300 text-sm mt-1">
                         Acesso direto ao Lucas para tirar dúvidas e receber orientação personalizada.
                       </p>
                       <span className="text-purple-400 font-semibold text-sm">Valor: R$ 497</span>
@@ -1050,11 +1259,11 @@ export default function QuizV2() {
                   <div className="flex items-start gap-3">
                     <span className="text-2xl">👥</span>
                     <div>
-                      <h5 className="text-gray-900 font-bold">BÔNUS 7: Comunidade VIP Desenrolado</h5>
-                      <p className="text-gray-600 text-sm mt-1">
+                      <h5 className="text-white font-bold">BÔNUS 7: Comunidade VIP Desenrolado</h5>
+                      <p className="text-gray-300 text-sm mt-1">
                         Grupo privado de suporte com mais de 5.000 homens que reconquistaram suas ex.
                       </p>
-                      <span className="text-red-600 font-semibold text-sm">Valor: R$ 297</span>
+                      <span className="text-red-400 font-semibold text-sm">Valor: R$ 297</span>
                     </div>
                   </div>
                 </div>
@@ -1062,10 +1271,10 @@ export default function QuizV2() {
 
               {/* Total Value */}
               <div className="bg-red-500/20 border border-red-400/30 rounded-xl p-4 mt-6 text-center">
-                <p className="text-gray-900 font-bold text-lg">
-                  VALOR TOTAL DOS BÔNUS: <span className="text-red-600 line-through">R$ 2.539</span>
+                <p className="text-white font-bold text-lg">
+                  VALOR TOTAL DOS BÔNUS: <span className="text-red-400 line-through">R$ 2.539</span>
                 </p>
-                <p className="text-red-600 font-bold text-xl">
+                <p className="text-red-400 font-bold text-xl">
                   HOJE POR APENAS: R$ 47
                 </p>
               </div>
@@ -1073,7 +1282,7 @@ export default function QuizV2() {
 
             {/* Social Proof Section */}
             <div className="mb-8">
-              <h3 className="text-xl font-bold text-gray-900 text-center mb-6">
+              <h3 className="text-xl font-bold text-white text-center mb-6">
                 📱 VEJA OS RESULTADOS DOS NOSSOS ALUNOS:
               </h3>
 
@@ -1089,20 +1298,20 @@ export default function QuizV2() {
               </div>
 
               <div className="bg-gray-800/50 rounded-xl p-4 mb-4">
-                <p className="text-gray-600 text-sm italic mb-2">
+                <p className="text-gray-300 text-sm italic mb-2">
                   "Em menos de 24 horas ela me desbloqueou e disse que estava sentindo minha falta..."
                 </p>
                 <p className="text-blue-400 font-semibold text-sm">- Rafael, 28 anos</p>
               </div>
               <div className="bg-gray-800/50 rounded-xl p-4 mb-4">
-                <p className="text-gray-600 text-sm italic mb-2">
+                <p className="text-gray-300 text-sm italic mb-2">
                   "Funciona mesmo! Ela que terminou comigo veio atrás pedindo uma nova chance."
                 </p>
                 <p className="text-blue-400 font-semibold text-sm">- Carlos, 32 anos</p>
               </div>
               <div className="bg-gray-800/50 rounded-xl p-4 mb-4">
-                <p className="text-gray-600 text-sm italic mb-2">
-                  "Em 48h ela estava na minha porta chorando e pedindo perdão. Inacreditável!"
+                <p className="text-gray-300 text-sm italic mb-2">
+                  "Ela voltou a me procurar depois de aplicar o protocolo. Funcionou mesmo!"
                 </p>
                 <p className="text-blue-400 font-semibold text-sm">- Bruno, 26 anos</p>
               </div>
@@ -1127,28 +1336,28 @@ export default function QuizV2() {
             {/* Authority Reinforcement */}
             <div className="bg-red-600/20 border border-red-400/30 rounded-xl p-6 mb-8">
               <div className="text-center">
-                <h4 className="text-gray-900 font-bold mb-3">QUEM SOU EU PARA TE ENSINAR ISSO?</h4>
-                <div className="text-gray-600 text-sm space-y-2">
-                  <p>✅ <strong className="text-gray-900">Psicanalista Clínico</strong> especializado em relacionamentos</p>
-                  <p>✅ <strong className="text-gray-900">2 milhões de seguidores</strong> em todas as redes sociais</p>
-                  <p>✅ <strong className="text-gray-900">Reconquistei minha própria ex</strong> (hoje minha noiva)</p>
-                  <p>✅ <strong className="text-gray-900">30.000+ casais</strong> já reconquistaram usando meus métodos</p>
-                  <p>✅ <strong className="text-gray-900">Fundador do Clube das Deusas</strong> com 2.800 alunas</p>
+                <h4 className="text-white font-bold mb-3">QUEM SOU EU PARA TE ENSINAR ISSO?</h4>
+                <div className="text-gray-300 text-sm space-y-2">
+                  <p>✅ <strong className="text-white">Psicanalista Clínico</strong> especializado em relacionamentos</p>
+                  <p>✅ <strong className="text-white">2 milhões de seguidores</strong> em todas as redes sociais</p>
+                  <p>✅ <strong className="text-white">Reconquistei minha própria ex</strong> (hoje minha noiva)</p>
+                  <p>✅ <strong className="text-white">30.000+ casais</strong> já reconquistaram usando meus métodos</p>
+                  <p>✅ <strong className="text-white">Fundador do Clube das Deusas</strong> com 2.800 alunas</p>
                 </div>
               </div>
             </div>
 
             {/* Final Push */}
             <div className="bg-red-600/20 border border-red-400/30 rounded-xl p-6 mb-8">
-              <h4 className="text-gray-900 font-bold text-center mb-4">
+              <h4 className="text-white font-bold text-center mb-4">
                 ⚠️ VOCÊ NÃO ESTÁ AQUI POR ACASO!
               </h4>
-              <p className="text-gray-600 text-center text-[0.95rem] leading-relaxed">
-                Se você chegou até aqui é porque o <strong className="text-gray-900">universo está te dando uma segunda chance</strong>.
+              <p className="text-gray-300 text-center text-[0.95rem] leading-relaxed">
+                Se você chegou até aqui é porque o <strong className="text-white">universo está te dando uma segunda chance</strong>.
                 A pergunta é: você vai aproveitar ou vai deixar ela passar?
               </p>
               <div className="mt-4 text-center">
-                <p className="text-red-600 font-semibold text-sm">
+                <p className="text-red-400 font-semibold text-sm">
                   Tome seu lugar... no centro dos pensamentos dela.
                 </p>
               </div>
@@ -1157,7 +1366,7 @@ export default function QuizV2() {
             {/* Final CTA */}
             <a
               href="https://pay.kiwify.com.br/2yjxPKj"
-              className="block w-full py-5 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 active:scale-[0.98] text-gray-900 font-bold text-lg rounded-2xl transition-all duration-150 shadow-lg shadow-green-500/20 text-center uppercase tracking-wide mb-6"
+              className="block w-full py-5 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 active:scale-[0.98] text-white font-bold text-lg rounded-2xl transition-all duration-150 shadow-lg shadow-green-500/20 text-center uppercase tracking-wide mb-6"
             >
               💚 SIM! QUERO RECONQUISTAR MINHA EX AGORA!
             </a>
@@ -1177,17 +1386,30 @@ export default function QuizV2() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen relative overflow-hidden">
+      {/* Background */}
+      <div
+        className="fixed inset-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: `url('/img/testea.jpg')`,
+          filter: 'blur(8px) brightness(0.2)',
+          transform: 'scale(1.1)',
+          zIndex: -2
+        }}
+      />
+
+      {/* Dark overlay */}
+      <div className="fixed inset-0 bg-gradient-to-b from-black/50 via-black/70 to-black/50" style={{ zIndex: -1 }} />
 
       {/* Progress Bar */}
       {currentStep >= 1 && currentStep <= 5 && (
-        <div className="w-full p-4 bg-white">
+        <div className="fixed top-0 left-0 right-0 z-50 p-4">
           <div className="max-w-md mx-auto">
-            <div className="flex justify-between text-sm text-gray-600 mb-2">
+            <div className="flex justify-between text-sm text-gray-300 mb-2">
               <span>Pergunta {currentStep} de 5</span>
               <span>{Math.round(progress)}%</span>
             </div>
-            <div className="w-full bg-gray-200 rounded-full h-2">
+            <div className="w-full bg-gray-700/50 backdrop-blur-md rounded-full h-2 border border-white/10">
               <div
                 className="bg-red-500 h-2 rounded-full transition-all duration-500"
                 style={{ width: `${progress}%` }}
@@ -1197,16 +1419,18 @@ export default function QuizV2() {
         </div>
       )}
 
-      <div className="w-full">
-        {renderCurrentStep()}
+      <div className="relative z-10 min-h-screen flex items-center justify-center p-4">
+        <div className="max-w-lg w-full">
+          {renderCurrentStep()}
+        </div>
       </div>
 
       {/* Back Redirect Global Overlay */}
       {showBackRedirect && (
         <div className="fixed inset-0 z-[9999] bg-black bg-opacity-95 flex items-start justify-center p-4 overflow-y-auto">
-          <div className="bg-white rounded-lg sm:rounded-2xl shadow-lg max-w-md sm:max-w-lg md:max-w-2xl w-full max-h-[95vh] overflow-y-auto animate-fadeInUp">
+          <div className="bg-white rounded-lg sm:rounded-2xl shadow-2xl max-w-md sm:max-w-lg md:max-w-2xl w-full max-h-[95vh] overflow-y-auto animate-fadeInUp">
             {/* Header */}
-            <div className="bg-red-600 text-gray-900 text-center py-6 px-4">
+            <div className="bg-red-600 text-white text-center py-6 px-4">
               <h1 className="text-2xl md:text-3xl font-bold mb-2">
                 NÃO FECHE ESSA PÁGINA AINDA!
               </h1>
@@ -1229,7 +1453,7 @@ export default function QuizV2() {
 
                 <button
                   onClick={handleBackRedirectCTA}
-                  className="bg-red-500 hover:bg-red-600 text-gray-900 text-lg md:text-xl font-bold py-3 md:py-4 px-6 md:px-8 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 mb-4 w-full sm:w-auto"
+                  className="bg-green-500 hover:bg-green-600 text-white text-lg md:text-xl font-bold py-3 md:py-4 px-6 md:px-8 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 mb-4 w-full sm:w-auto"
                 >
                   🎯 QUERO RECONQUISTAR MINHA EX
                 </button>
@@ -1286,7 +1510,7 @@ export default function QuizV2() {
               {/* Final CTA */}
               <button
                 onClick={handleBackRedirectCTA}
-                className="bg-red-600 hover:bg-red-700 text-gray-900 text-lg md:text-xl font-bold py-3 md:py-4 px-6 md:px-8 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 w-full sm:w-auto animate-pulse"
+                className="bg-green-600 hover:bg-green-700 text-white text-lg md:text-xl font-bold py-3 md:py-4 px-6 md:px-8 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 w-full sm:w-auto animate-pulse"
               >
                 💝 QUERO RECONQUISTAR MINHA EX
               </button>

@@ -88,7 +88,7 @@ function ProtocolLoader({
     if (currentStep < 0 || currentStep >= protocolSteps.length) return;
 
     // Calcular duração baseada no delay total
-    const totalDuration = startDelay > 0 ? startDelay : 15000; // 7min 12seg ou 15seg default
+    const totalDuration = startDelay > 0 ? startDelay : 432000; // 7min 12sec
     const stepDuration = totalDuration / protocolSteps.length;
     const duration = stepDuration;
     const interval = 30;
@@ -401,6 +401,8 @@ export default function QuizV2() {
 
   const handleProtocolComplete = useCallback(() => {
     setProtocolDone(true);
+    setSalesActive(true);
+    // NÃO mudar de step - o conteúdo aparece na mesma página
   }, []);
 
 
@@ -1109,6 +1111,13 @@ export default function QuizV2() {
         return (
           <>
             <div className="bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl p-8 shadow-2xl animate-fadeInUp">
+              {/* VSL Instruction Text */}
+              <div className="text-center mb-4">
+                <p className="text-white text-base">
+                  Assista o vídeo abaixo enquanto criamos seu <span className="font-bold">protocolo personalizado de reconquista</span>.
+                </p>
+              </div>
+
               {/* VTurb Video Player */}
               <div className="mb-8">
                 <VTurbPlayer />
@@ -1123,15 +1132,206 @@ export default function QuizV2() {
               )}
 
               {protocolDone && (
-                <button
-                  onClick={() => {
-                    setSalesActive(true);
-                    setCurrentStep(10);
-                  }}
-                  className="w-full mt-8 py-4 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 active:scale-[0.98] text-white font-bold text-base rounded-2xl transition-all duration-150 shadow-lg shadow-green-500/20 cursor-pointer uppercase tracking-wide animate-fadeInUp"
-                >
-                  Clique aqui para RECONQUISTAR sua ex!
-                </button>
+                <>
+                  {/* Botão ainda disponível mas não é mais necessário clicar */}
+                  <button
+                    className="w-full mt-8 py-4 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 active:scale-[0.98] text-white font-bold text-base rounded-2xl transition-all duration-150 shadow-lg shadow-green-500/20 cursor-pointer uppercase tracking-wide animate-fadeInUp"
+                  >
+                    Clique aqui para RECONQUISTAR sua ex!
+                  </button>
+
+                  {/* PÁGINA DE VENDAS APARECE AUTOMATICAMENTE AQUI */}
+                  <div className="mt-8 bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl p-8 shadow-2xl animate-fadeInUp">
+                    {/* Title Section */}
+                    <h3 className="text-lg font-normal text-white text-center mb-6 leading-tight">
+                      Ao garantir seu acesso ao <strong className="font-bold">CÓDIGO DA RECONQUISTA</strong><br/>
+                      você recebe uma <strong className="font-bold">GARANTIA INQUEBRÁVEL de 90 dias</strong><br/>
+                      <span className="text-green-400 font-bold">+5 PRESENTES!</span> ⬇️
+                    </h3>
+
+                    {/* Guarantee Text */}
+                    <div className="mb-8 text-white">
+                      <p className="mb-4">Eu sei exatamente o que está passando pela sua cabeça agora.</p>
+                      <p className="mb-2">"E se eu comprar e nada acontecer?"</p>
+                      <p className="mb-2">"E se ela não voltar?"</p>
+                      <p className="mb-4">"E se for só mais uma promessa vazia na internet?"</p>
+                      <p className="mb-4">E é por isso que eu decidi fazer algo que nenhum outro especialista em relacionamentos tem coragem de fazer: te dar <strong>uma garantia de 90 dias</strong>, sem pegadinhas e sem letra miúda.</p>
+                      <p className="mb-2">Funciona assim:</p>
+                      <p className="mb-2">Você entra pro <strong>Código da Reconquista</strong> hoje…</p>
+                      <p className="mb-2">Aplica o que eu ensino, envia as mensagens, segue o protocolo passo a passo…</p>
+                      <p className="mb-4">E se em até <strong>90 dias</strong> sua ex <strong>não voltar pra você, eu devolvo cada centavo do seu investimento.</strong></p>
+                      <p className="mb-2">Sem perguntas, sem burocracia, sem letras miúdas.</p>
+                      <p className="mb-4">Se não funcionar pra você, você não paga nada.</p>
+                      <p className="mb-4">Simples assim.</p>
+                      <p className="mb-2">Eu faço isso porque sei o que eu entrego.</p>
+                      <p className="mb-4">E porque já vi esse mesmo método transformar <strong>homens destruídos:</strong></p>
+                      <p className="mb-4">Em <strong>caras que reconquistaram o respeito, o desejo e o amor da mulher que mais amavam.</strong></p>
+                      <p className="mb-2">Então, você não tá investindo em "mais um curso".</p>
+                      <p className="mb-4">Você está investindo em <strong>uma segunda chance de reescrever a história da sua vida amorosa.</strong></p>
+                      <p className="mb-4">E eu confio tanto nesse método que boto meu nome e minha reputação em jogo pra provar isso.</p>
+                      <p className="mb-2">Então, agora é contigo.</p>
+                      <p className="mb-4">Você pode continuar rolando a tela, fingindo que vai pensar mais um pouco…</p>
+                      <p className="mb-4">Ou pode <strong>clicar no botão abaixo…</strong></p>
+                      <p className="mb-2"><strong>💔 Ficar preso nos 12% e perder ela pra sempre.</strong></p>
+                      <p className="mb-4"><strong>❤️ Ou agir agora e usar o mesmo protocolo que já reconectou mais de 30 mil casais.</strong></p>
+                      <p className="mb-4 text-center text-xl"><strong>Código da Reconquista com 90 dias de garantia 👇🏻</strong></p>
+                    </div>
+
+                    {/* CTA Button after guarantee text */}
+                    <button
+                      onClick={() => window.location.href = "https://pay.hub.la/VL6XGVMjYtWfFoqme7Sx"}
+                      className="w-full mt-8 py-4 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 active:scale-[0.98] text-white font-bold text-base rounded-2xl transition-all duration-150 shadow-lg shadow-green-500/20 cursor-pointer uppercase tracking-wide animate-fadeInUp mb-8"
+                    >
+                      Clique aqui para RECONQUISTAR sua ex!
+                    </button>
+
+                    {/* Bonuses Section */}
+                    <div className="mb-8">
+                      <div className="space-y-4">
+                        {bonuses.map((bonus, i) => (
+                          <BonusCard key={i} {...bonus} index={i} />
+                        ))}
+                      </div>
+
+                      {/* Bonus Urgency Text */}
+                      <div className="mt-6 text-center">
+                        <p className="text-white text-sm font-semibold mb-2">
+                          Esses bônus especiais ficarão disponíveis por somente <span className="text-red-400">15 minutos!</span>
+                        </p>
+                        <p className="text-white text-sm">
+                          Clique aqui para garanti-los agora com o <span className="font-bold">Código da Reconquista!</span>
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Countdown Timer */}
+                    {salesActive && <Countdown active={salesActive} />}
+
+                    {/* Testimonial Text */}
+                    <div className="text-center mb-6 mt-6">
+                      <p className="text-white text-base">
+                        Esses caras estavam no <span className="font-bold">mesmo barco que você</span>, mas olha só o que aconteceu depois que eles usaram o <span className="font-bold">CÓDIGO DA RECONQUISTA</span> 👇🏻👀
+                      </p>
+                    </div>
+
+                    {/* Testimonial Images */}
+                    <div className="space-y-4 mb-6">
+                      <img src="/img/depoimento-1.webp" alt="Depoimento 1" className="w-full rounded-xl shadow-lg" />
+                      <img src="/img/depoimento-2.webp" alt="Depoimento 2" className="w-full rounded-xl shadow-lg" />
+                      <img src="/img/depoimento-3.webp" alt="Depoimento 3" className="w-full rounded-xl shadow-lg" />
+                      <img src="/img/depoimento-4.webp" alt="Depoimento 4" className="w-full rounded-xl shadow-lg" />
+                      <img src="/img/depoimento-5.webp" alt="Depoimento 5" className="w-full rounded-xl shadow-lg" />
+                      <img src="/img/depoimento-6.webp" alt="Depoimento 6" className="w-full rounded-xl shadow-lg" />
+                      <img src="/img/depoimento-7.webp" alt="Depoimento 7" className="w-full rounded-xl shadow-lg" />
+                    </div>
+
+                    {/* Bonus Acceleration Text */}
+                    <div className="text-center mb-6">
+                      <p className="text-white text-base mb-4">
+                        E pra acelerar ainda mais os resultados da sua reconquista… você vai receber <span className="font-bold">acessos VIPs a bônus estratégicos</span>, criados pra destravar reações quase que imediatas na mente dela...
+                      </p>
+                      <p className="text-white text-base mb-4">
+                        São técnicas tão diretas que, em média, em até 48h os alunos relatam mensagens, reações nos stories e até a ex puxando papo do nada. Como aconteceu com esse meu aluno aqui, veja só:
+                      </p>
+                      <p className="text-white text-base">
+                        E isso é apenas o começo, <span className="font-bold">PORQUE COMO VOCÊ CHEGOU ATÉ AQUI</span>, eu resolvi conversar com minha equipe e te entregar <span className="font-bold">+2 PRESENTES AINDA MAIS EXCLUSIVOS</span> agora!
+                      </p>
+                    </div>
+
+                    {/* Bonus Images */}
+                    <div className="space-y-4 mb-6">
+                      <img src="/img/bonus-lives.webp" alt="Bônus Lives Semanais" className="w-full rounded-xl shadow-lg" />
+                      <img src="/img/bonus-comunidade.webp" alt="Bônus Comunidade Desenrolado" className="w-full rounded-xl shadow-lg" />
+                    </div>
+
+                    {/* Best Part Text */}
+                    <div className="text-left mb-6">
+                      <p className="text-white text-base mb-4">
+                        E aqui está a melhor parte:
+                      </p>
+                      <p className="text-white text-base mb-3">
+                        Esses caras estavam exatamente onde você está agora.
+                      </p>
+                      <div className="text-white text-base mb-4 space-y-1">
+                        <p>➡️ Bloqueados no WhatsApp.</p>
+                        <p>➡️ Ignorados.</p>
+                        <p>➡️ Cheios de arrependimento, dúvidas e medo de nunca mais ter uma chance.</p>
+                      </div>
+                      <p className="text-white text-base mb-4">
+                        Mas decidiram agir.
+                      </p>
+                      <p className="text-white text-base mb-4">
+                        E quando aplicaram o protocolo, o jogo virou.
+                      </p>
+                      <p className="text-white text-base mb-3">
+                        Hoje, são eles que recebem mensagem primeiro.
+                      </p>
+                      <p className="text-white text-base mb-3">
+                        São eles que fazem a ex sentir saudade de novo.
+                      </p>
+                      <p className="text-white text-base mb-4">
+                        São eles que escolheram se queriam voltar — ou se era tarde demais pra ela.
+                      </p>
+                      <p className="text-white text-base mb-3">
+                        E tudo começou com uma única decisão:
+                      </p>
+                      <p className="text-white text-base mb-4">
+                        Desbloquear o poder de reprogramar o cérebro da ex com o Código da Reconquista.
+                      </p>
+                      <p className="text-white text-base mb-6">
+                        E você pode tomar essa mesma decisão apertando o botão abaixo:
+                      </p>
+                    </div>
+
+                    {/* CTA Button */}
+                    <a
+                      href="https://pay.hub.la/VL6XGVMjYtWfFoqme7Sx"
+                      className="block w-full py-5 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 active:scale-[0.98] text-white font-bold text-lg rounded-2xl transition-all duration-150 shadow-lg shadow-green-500/20 text-center uppercase tracking-wide mb-6"
+                    >
+                      CLIQUE AQUI PARA RECONQUISTAR SUA EX!
+                    </a>
+
+                    {/* Not By Chance Text */}
+                    <div className="text-left mb-6">
+                      <p className="text-white text-base mb-4">
+                        E olha… você não está aqui por acaso.
+                      </p>
+                      <p className="text-white text-base mb-4">
+                        Você está aqui porque sabe que sua ex não te enxerga mais como antes.
+                      </p>
+                      <p className="text-white text-base mb-4">
+                        E agora você só tem duas opções:
+                      </p>
+                      <div className="text-white text-base mb-4 space-y-2">
+                        <p>❌ Continuar mandando mensagens aleatórias, vendo ela correr pros braços de outro.</p>
+                        <p>✅ Ou aplicar mensagens cirúrgicas do protocolo, que fazem ela querer se comprometer de novo.</p>
+                      </div>
+                      <p className="text-white text-base mb-4">
+                        O Código da Reconquista te entrega exatamente:
+                      </p>
+                      <p className="text-white text-base mb-4">
+                        👉 O que dizer, quando dizer e como manter a mente dela viciada em você.
+                      </p>
+                      <p className="text-white text-base mb-3">
+                        Clique no botão abaixo.
+                      </p>
+                      <p className="text-white text-base mb-3">
+                        Desbloqueie seu acesso agora.
+                      </p>
+                      <p className="text-white text-base mb-6">
+                        E assuma o seu lugar — no centro dos pensamentos dela.
+                      </p>
+                    </div>
+
+                    {/* Another CTA Button */}
+                    <a
+                      href="https://pay.hub.la/VL6XGVMjYtWfFoqme7Sx"
+                      className="block w-full py-5 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 active:scale-[0.98] text-white font-bold text-lg rounded-2xl transition-all duration-150 shadow-lg shadow-green-500/20 text-center uppercase tracking-wide"
+                    >
+                      CLIQUE AQUI PARA RECONQUISTAR SUA EX!
+                    </a>
+                  </div>
+                </>
               )}
             </div>
 
@@ -1209,7 +1409,7 @@ export default function QuizV2() {
 
             {/* First CTA */}
             <a
-              href="https://pay.kiwify.com.br/2yjxPKj"
+              href="https://pay.hub.la/VL6XGVMjYtWfFoqme7Sx"
               className="block w-full py-4 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 active:scale-[0.98] text-white font-bold text-lg rounded-2xl transition-all duration-150 shadow-lg shadow-green-500/20 text-center uppercase tracking-wide mb-8"
             >
               🎯 QUERO RECONQUISTAR MINHA EX AGORA!
@@ -1365,7 +1565,7 @@ export default function QuizV2() {
 
             {/* Final CTA */}
             <a
-              href="https://pay.kiwify.com.br/2yjxPKj"
+              href="https://pay.hub.la/VL6XGVMjYtWfFoqme7Sx"
               className="block w-full py-5 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 active:scale-[0.98] text-white font-bold text-lg rounded-2xl transition-all duration-150 shadow-lg shadow-green-500/20 text-center uppercase tracking-wide mb-6"
             >
               💚 SIM! QUERO RECONQUISTAR MINHA EX AGORA!

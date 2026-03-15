@@ -67,6 +67,8 @@ function ProtocolLoader({
   useEffect(() => {
     if (!active) return;
 
+    console.log("ProtocolLoader starting! active:", active, "startDelay:", startDelay);
+
     if (startDelay > 0) {
       // Iniciar carregamento imediatamente mas distribuir ao longo do delay
       setCurrentStep(0);
@@ -79,6 +81,7 @@ function ProtocolLoader({
       return () => clearTimeout(delayTimer);
     } else {
       // Sem delay, iniciar imediatamente
+      console.log("Starting immediately with no delay");
       setDelayComplete(true);
       setCurrentStep(0);
     }
@@ -88,7 +91,7 @@ function ProtocolLoader({
     if (currentStep < 0 || currentStep >= protocolSteps.length) return;
 
     // Calcular duração baseada no delay total
-    const totalDuration = startDelay > 0 ? startDelay : 15000; // 7min 12seg ou 15seg default
+    const totalDuration = startDelay > 0 ? startDelay : 5000; // 5 segundos para teste
     const stepDuration = totalDuration / protocolSteps.length;
     const duration = stepDuration;
     const interval = 30;
@@ -109,6 +112,7 @@ function ProtocolLoader({
           setTimeout(() => setCurrentStep(currentStep + 1), 200);
         } else {
           setTimeout(() => {
+            console.log("ProtocolLoader: Calling onComplete now!");
             setDone(true);
             onComplete();
           }, 500);
@@ -400,9 +404,18 @@ export default function QuizV2() {
   }
 
   const handleProtocolComplete = useCallback(() => {
+    console.log("Protocol complete! Setting protocolDone and salesActive to true");
     setProtocolDone(true);
+    setSalesActive(true);
+    // NÃO mudar de step, o conteúdo aparece na mesma página
   }, []);
 
+  // Debug useEffect
+  useEffect(() => {
+    console.log("protocolDone changed to:", protocolDone);
+    console.log("salesActive changed to:", salesActive);
+    console.log("currentStep is:", currentStep);
+  }, [protocolDone, salesActive, currentStep]);
 
   // Back redirect logic (ativa após pergunta 1)
   useEffect(() => {
@@ -906,6 +919,11 @@ export default function QuizV2() {
         return (
           <>
             <div className="bg-black p-8 shadow-lg animate-fadeInUp">
+              {/* Debug Status */}
+              <div style={{background: 'yellow', color: 'black', padding: '10px', marginBottom: '20px', fontWeight: 'bold'}}>
+                DEBUG: protocolDone = {protocolDone ? 'TRUE ✅' : 'FALSE ❌'}
+              </div>
+
               {/* Instruction Text */}
               <p className="text-center text-gray-700 font-medium text-lg mb-6">
                 Assista o vídeo abaixo enquanto criamos seu protocolo personalizado de reconquista.
@@ -916,24 +934,182 @@ export default function QuizV2() {
                 <VTurbPlayer />
               </div>
 
-              {currentStep === 9 && (
-                <ProtocolLoader
-                  active={true}
-                  startDelay={0}
-                  onComplete={handleProtocolComplete}
-                />
+              {currentStep === 9 ? (
+                <>
+                  <div style={{background: 'cyan', color: 'black', padding: '10px', marginBottom: '10px', fontWeight: 'bold'}}>
+                    ProtocolLoader está ATIVO - Aguarde 5 segundos...
+                  </div>
+                  <ProtocolLoader
+                    active={true}
+                    startDelay={0}
+                    onComplete={handleProtocolComplete}
+                  />
+                </>
+              ) : (
+                <div style={{background: 'red', color: 'white', padding: '10px', marginBottom: '10px', fontWeight: 'bold'}}>
+                  ProtocolLoader NÃO está ativo - currentStep = {currentStep}
+                </div>
               )}
 
               {protocolDone && (
-                <button
-                  onClick={() => {
-                    setSalesActive(true);
-                    setCurrentStep(10);
-                  }}
-                  className="w-full mt-8 py-4 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 active:scale-[0.98] text-white font-bold text-base rounded-2xl transition-all duration-150 shadow-lg shadow-green-500/20 cursor-pointer uppercase tracking-wide animate-fadeInUp"
-                >
-                  Clique aqui para RECONQUISTAR sua ex!
-                </button>
+                <>
+                  <div style={{backgroundColor: 'red', color: 'white', padding: '20px', marginTop: '20px', fontSize: '24px', fontWeight: 'bold', textAlign: 'center'}}>
+                    PROTOCOLO CONCLUÍDO - PÁGINA DE VENDAS DEVE APARECER AQUI
+                  </div>
+
+                  <button
+                    className="w-full mt-8 py-4 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 active:scale-[0.98] text-white font-bold text-base rounded-2xl transition-all duration-150 shadow-lg shadow-green-500/20 cursor-pointer uppercase tracking-wide animate-fadeInUp"
+                  >
+                    Clique aqui para RECONQUISTAR sua ex!
+                  </button>
+
+                  {/* Página de vendas aparece automaticamente após o protocolo */}
+                    <div className="mt-8 animate-fadeInUp">
+                      {/* Header - Protocol Complete */}
+                      <div className="text-center mb-8">
+                        <div className="text-4xl mb-4">✅</div>
+                        <h2 className="text-2xl font-bold text-white mb-4">
+                          SEU PROTOCOLO PERSONALIZADO FOI GERADO!
+                        </h2>
+                        <p className="text-gray-600 text-[0.95rem] leading-relaxed">
+                          Agora você tem acesso aos <strong className="text-white">códigos diretos</strong> para
+                          fazer sua ex sentir sua falta e voltar correndo pra você...
+                        </p>
+                      </div>
+
+                      {/* Purchase Button */}
+                      <a
+                        href="https://pay.kiwify.com.br/2yjxPKj"
+                        className="block w-full py-4 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 active:scale-[0.98] text-white font-bold text-lg rounded-2xl transition-all duration-150 shadow-lg shadow-green-500/20 text-center uppercase tracking-wide mb-8"
+                      >
+                        Clique para RECONQUISTAR sua ex!
+                      </a>
+
+                      {/* Bonus Text */}
+                      <div className="text-center mb-8">
+                        <p className="text-white text-lg font-semibold">
+                          E se você agir agora, eu vou te entregar +5 presentes especiais, olha só!
+                        </p>
+                      </div>
+
+                      {/* Bonus Images */}
+                      <div className="space-y-6 mb-8">
+                        <div className="text-center">
+                          <Image
+                            src="/img/b1.png"
+                            alt="Bônus 1 - Checklist Anti-Rejeição"
+                            width={300}
+                            height={200}
+                            className="rounded-xl mx-auto shadow-lg"
+                          />
+                        </div>
+
+                        <div className="text-center">
+                          <Image
+                            src="/img/b2.png"
+                            alt="Bônus 2 - Código do Ciúme Instantâneo"
+                            width={300}
+                            height={200}
+                            className="rounded-xl mx-auto shadow-lg"
+                          />
+                        </div>
+
+                        <div className="text-center">
+                          <Image
+                            src="/img/b3.png"
+                            alt="Bônus 3 - A Carta Proibida de Último Recurso"
+                            width={300}
+                            height={200}
+                            className="rounded-xl mx-auto shadow-lg"
+                          />
+                        </div>
+
+                        <div className="text-center">
+                          <Image
+                            src="/img/b4.png"
+                            alt="Bônus 4 - O Dossiê do Rival Descartável"
+                            width={300}
+                            height={200}
+                            className="rounded-xl mx-auto shadow-lg"
+                          />
+                        </div>
+
+                        <div className="text-center">
+                          <Image
+                            src="/img/b5.png"
+                            alt="Bônus 5 - Manual da Reativação das Emoções Ocultas"
+                            width={300}
+                            height={200}
+                            className="rounded-xl mx-auto shadow-lg"
+                          />
+                        </div>
+                      </div>
+
+                      {/* Additional Bonus Content */}
+                      <div className="space-y-6 mb-8">
+                        <div className="text-center">
+                          <Image
+                            src="/img/bonus-lives.webp"
+                            alt="Bônus Lives Semanais"
+                            width={400}
+                            height={300}
+                            className="rounded-xl mx-auto shadow-lg"
+                          />
+                        </div>
+
+                        <div className="text-center">
+                          <Image
+                            src="/img/bonus-comunidade.webp"
+                            alt="Bônus Comunidade VIP"
+                            width={400}
+                            height={300}
+                            className="rounded-xl mx-auto shadow-lg"
+                          />
+                        </div>
+                      </div>
+
+                      {/* Countdown Timer */}
+                      {salesActive && <Countdown active={salesActive} />}
+
+                      {/* Guarantee Section */}
+                      <div className="bg-red-500/20 border border-red-400/30 rounded-2xl p-6 mb-8">
+                        <h3 className="text-xl font-extrabold text-white text-center mb-4">
+                          🛡️ GARANTIA INCONDICIONAL DE 90 DIAS
+                        </h3>
+                        <p className="text-gray-300 text-center mb-4">
+                          Aplicou e não funcionou? <strong className="text-white">Devolvemos 100% do seu dinheiro</strong>, sem perguntas.
+                        </p>
+                        <div className="bg-red-600/30 rounded-xl p-4">
+                          <p className="text-center text-white font-bold text-lg">
+                            Isso mesmo... Se em 90 dias você aplicar tudo que ensino e não conseguir <span className="text-red-400">NENHUM</span> resultado, eu assumo total responsabilidade e <span className="text-green-400">devolvemos cada centavo</span> que você investiu.
+                          </p>
+                          <p className="text-center text-white mt-3">
+                            <strong>E sabe o que isso significa?</strong>
+                          </p>
+                          <p className="text-center text-red-400 font-bold text-lg mt-2">
+                            Que todo o risco é meu!
+                          </p>
+                          <p className="text-center text-gray-300 mt-3">
+                            Ou você reconquista sua ex ou <strong className="text-white">seu dinheiro volta</strong>. Simples assim.
+                          </p>
+                          <p className="text-center text-white font-bold text-lg mt-4">
+                            Mas isso só é possível porque eu sei que o método funciona.
+                          </p>
+                          <p className="text-center text-red-400 font-bold text-xl mt-3">
+                            E vai funcionar com você também!
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Final Purchase Button */}
+                      <a
+                        href="https://pay.kiwify.com.br/2yjxPKj"
+                        className="block w-full py-5 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 active:scale-[0.98] text-white font-bold text-lg rounded-2xl transition-all duration-150 shadow-lg shadow-green-500/20 text-center uppercase tracking-wide"
+                      >
+                        💚 QUERO RECONQUISTAR MINHA EX AGORA!
+                      </a>
+                    </div>
+                </>
               )}
             </div>
 
